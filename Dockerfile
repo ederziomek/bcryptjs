@@ -1,5 +1,5 @@
-# Use an official Node.js runtime as a parent image
-FROM node:20-alpine AS builder
+# Use an official Node.js runtime as a parent image (Debian-based for better compatibility)
+FROM node:20-slim AS builder
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -11,6 +11,8 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install app dependencies using npm ci for cleaner installs
+# Might need build-essential or python if some deps have native bindings
+# RUN apt-get update && apt-get install -y --no-install-recommends build-essential python3 && npm ci && apt-get purge -y --auto-remove build-essential python3 && rm -rf /var/lib/apt/lists/*
 RUN npm ci
 
 # Copy the rest of the application code
@@ -26,12 +28,12 @@ RUN npx prisma generate
 RUN npm run build
 
 # --- Production Stage ---
-FROM node:20-alpine
+FROM node:20-slim
 
 WORKDIR /usr/src/app
 
-# Install libssl1.1 for Prisma compatibility on Alpine
-RUN apk add --no-cache libssl1.1
+# Install necessary runtime dependencies (like openssl if needed, but slim usually has it)
+# RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
 
 # Copy package.json and package-lock.json for production dependencies
 COPY package*.json ./
