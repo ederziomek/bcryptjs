@@ -1,0 +1,26 @@
+# railway.toml
+# This file provides configuration hints for deploying on Railway.
+
+[build]
+# Specifies that Railway should build the application using the Dockerfile in the root directory.
+builder = "dockerfile"
+
+[deploy]
+# The command to start the application after the build is complete.
+# This should match the CMD in your Dockerfile.
+startCommand = "node dist/src/main.js"
+
+# Optional: Define a health check endpoint if your application has one.
+# Railway uses this to determine if your deployment is healthy.
+# healthcheckPath = "/health"
+# healthcheckTimeout = 300 # Timeout in seconds
+
+# Optional: Define restart policy
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+# Note: You will need to create a PostgreSQL database service within your Railway project
+# and link the DATABASE_URL environment variable to your NestJS service.
+# Other environment variables (ADMIN_EMAIL, ADMIN_INITIAL_PASSWORD, etc.)
+# should also be configured in the Railway service settings.
+

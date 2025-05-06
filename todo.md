@@ -1,0 +1,13 @@
+- [x] Analisar `main.ts` para entender a configuração atual do AdminJS.
+- [x] Analisar `hash_admin_password.ts` para verificar a lógica de hashing de senha.
+- [x] Configurar o recurso `SystemSettings` no AdminJS em `main.ts`:
+    - Exibir e permitir edição de `activeCpaRule` (dropdown), `cpaMinimumDeposit`, `cpaActivityBetCount`, `cpaActivityMinGgr`, `cpaCommissionAmount`.
+    - Idealmente, permitir apenas a edição do registro existente (ou criar um se não houver).
+- [x] Configurar o recurso `AdminUser` no AdminJS em `main.ts`:
+    - Habilitar ações CRUD (new, list, show, edit, delete).
+    - Exibir `email`.
+    - Configurar campo `password` com tipo password e hashing antes de salvar (usando `before` hook e bcrypt).
+    - Campos `createdAt`, `updatedAt` como read-only.
+- [x] Implementar autenticação no AdminJS em `main.ts` usando `@adminjs/express`, `bcrypt` e o modelo `AdminUser`.
+- [x] Instalar dependências necessárias (ex: `bcrypt`, `@types/bcrypt`).
+- [x] Atualizar `todo.md` após cada etapa concluída.
