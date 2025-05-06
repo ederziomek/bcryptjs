@@ -32,8 +32,8 @@ FROM node:20-slim
 
 WORKDIR /usr/src/app
 
-# Install necessary runtime dependencies (like openssl if needed, but slim usually has it)
-# RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
+# Install necessary runtime dependencies (specifically openssl for Prisma)
+RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
 
 # Copy package.json and package-lock.json for production dependencies
 COPY package*.json ./
