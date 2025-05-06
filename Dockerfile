@@ -30,6 +30,9 @@ FROM node:20-alpine
 
 WORKDIR /usr/src/app
 
+# Install libssl1.1 for Prisma compatibility on Alpine
+RUN apk add --no-cache libssl1.1
+
 # Copy package.json and package-lock.json for production dependencies
 COPY package*.json ./
 
@@ -52,4 +55,3 @@ EXPOSE 3001
 # Define the command to run the app
 # Use the correct path based on previous findings
 CMD ["node", "dist/src/main.js"]
-
